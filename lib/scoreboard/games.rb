@@ -1,14 +1,16 @@
+require 'open-uri'
 require 'pry'
+require 'nokogiri'
 
 class Scoreboard::Games
 
-  attr_accessor :num_games, :matchup, :score, :status, :matchup_array, :away_team, :away_score, :home_team, :home_score
+  attr_accessor :games, :num_games, :matchup, :score, :status, :matchup_array, :away_team, :away_score, :home_team, :home_score
 
   def self.today
     # ***** Scrape games and then return games based on that data *****
     # Scoreboard::GameScraper.new("http://www.basketball-reference.com/boxscores/")
 
-    self.scrape_games
+    self.scrape_scores
 
     # game_1 = self.new
     # game_1.matchup = "NBA-- GSW vs Hou"
@@ -26,33 +28,31 @@ class Scoreboard::Games
 
   end
 
+  # def self.scrape_games
+  #   games = []
+  #   games << self.scrape_scores
+  #   games
+  # end
+
+
   def self.scrape_games
-    games = []
-    binding.pry
-    games << self.scrape_scores
-    games
-  end
-
-
-  def self.scrape_scores
     doc = Nokogiri::HTML(open("http://www.basketball-reference.com/boxscores/"))
     game_num = doc.search("td.align_left.valign_top").count
-    game = self.new
+    scraped_games = []
     i = 0
     while i <= game_num
-      game.self.new
       matchup_array = doc.css(".no_highlight .wide_table")[3*i].text.gsub(/^$\n/,'').split("\n")
-      game.away_team = matchup_array[0]
-      game.away_score = matchup_array[1]
-      game.home_team = matchup_array[3]
-      game.home_score = matchup_array[4]
-      game.matchup = "#{game.away_team} vs #{game.home_team}"
-      game.status = matchup_array[2]
-      game.score = "#{game.away_team}--#{game.away_score} vs #{game.home_team}--#{game.home_score} (#{game.status})"
-
+      away_team = matchup_array[0]
+      away_score = matchup_array[1]
+      home_team = matchup_array[3]
+      home_score = matchup_array[4]
+      game_matchup = "#{away_team} vs #{home_team}"
+      game_status = matchup_array[2]
+      game_score = "#{away_team}--#{away_score} vs #{home_team}--#{home_score} (#{status})"
+      scraped_games << {matchup: game_matchup, score: game_score, status: game_status}
+      i += 1
     end
-    game
-    i += 1
+    scraped_games
   end
 
 end

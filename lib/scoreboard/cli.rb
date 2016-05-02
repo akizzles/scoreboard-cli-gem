@@ -12,7 +12,7 @@ class Scoreboard::CLI
 
   def list_scores
     # here doc http://blog.jayfields.com/2006/12/ruby-multiline-strings-here-doc-or.html
-    @games = Scoreboard::Games.today
+    @games = Scoreboard::Games.scrape_scores
     @games.each.with_index(1) do |game, i|
       puts "#{i}. #{game.matchup}"
     end
