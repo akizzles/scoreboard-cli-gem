@@ -1,5 +1,10 @@
-require "scoreboard/version"
+require 'open-uri'
+require 'pry'
+require 'nokogiri'
+
+require_relative "./scoreboard/version"
+require_relative "./scoreboard/cli"
+require_relative "./scoreboard/games"
 
 module Scoreboard
-  # Your code goes here...
 end
