@@ -1,6 +1,6 @@
 # NbaScoreboard
 
-This Ruby Gem provides a very basic CLI to view as default the last most recent complete day of NBA games and scores
+This Ruby Gem provides a very basic CLI to view, as default, the last most recent complete day of NBA games and scores
 
 For example, if games are currently being played, the scoreboard will return zero games played today until basketball-reference.com updates the final score. If the season is over, obviously, there will be zero games played for that day. 
 
@@ -11,7 +11,9 @@ An update will later be provided to the CLI to incorporate full box scores with 
 Add this line to your application's Gemfile:
 
 ```ruby
+
 gem 'nba_scoreboard'
+
 ```
 
 And then execute:
@@ -35,7 +37,6 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/nba_scoreboard. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
-
 
 ## License
 
