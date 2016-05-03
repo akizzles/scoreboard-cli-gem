@@ -1,8 +1,3 @@
-# Our CLI Controller
-require 'open-uri'
-require 'pry'
-require 'nokogiri'
-
 class Scoreboard::CLI
   def call
     puts "Today's Games"
@@ -16,6 +11,7 @@ class Scoreboard::CLI
   def list_games
     # here doc http://blog.jayfields.com/2006/12/ruby-multiline-strings-here-doc-or.html
     games_array = Scoreboard::Scraper.scrape_games
+    game_num = games_array.count
     @games = Scoreboard::Games.today(games_array)
     @games.each.with_index(1) do |game, i|
       puts "#{i}. #{game[:matchup]}"

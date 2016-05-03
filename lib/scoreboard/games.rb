@@ -1,11 +1,6 @@
-require 'open-uri'
-require 'pry'
-require 'nokogiri'
-
 class Scoreboard::Games
 
-  attr_accessor :games, :games_array, :num_games, :matchup, :score, :status, :matchup_array, :away_team, :away_score, :home_team, :home_score, :games_hash
-
+  attr_accessor :game_num, :matchup, :score, :status
   @@all = []
 
   def initialize(games_hash)
