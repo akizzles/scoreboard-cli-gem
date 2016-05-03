@@ -16,12 +16,9 @@ class Scoreboard::CLI
   def list_games
     # here doc http://blog.jayfields.com/2006/12/ruby-multiline-strings-here-doc-or.html
     games_array = Scoreboard::Scraper.scrape_games
-    Scoreboard::Games.today(games_array)
-    binding.pry
-    Scoreboard::Games.all.each.with_index(1) do |game, i|
-      puts "#{i}. #{game.matchup}"
-    # @games.each.with_index(1) do |game, i|
-    #   puts "#{i}. #{game.matchup}"
+    @games = Scoreboard::Games.today(games_array)
+    @games.each.with_index(1) do |game, i|
+      puts "#{i}. #{game[:matchup]}"
     end
   end
 
@@ -33,9 +30,9 @@ class Scoreboard::CLI
 
       if input.to_i > 0
         the_game = @games[input.to_i-1]
-        puts "#{the_game.score}"
+        puts "#{the_game[:score]}"
       elsif input == "list"
-        list_scores
+        list_games
       else
         puts "Invalid"
       end
