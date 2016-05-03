@@ -1,18 +1,21 @@
 # Our CLI Controller
+require 'pry'
 
 class Scoreboard::CLI
   def call
     puts "Today's Games"
-    list_scores
+    list_games
     menu
     #list_scores
     #games
     goodbye
   end
 
-  def list_scores
+  def list_games
     # here doc http://blog.jayfields.com/2006/12/ruby-multiline-strings-here-doc-or.html
-    @games = Scoreboard::Games.scrape_scores
+    games_array = Scoreboard::Scraper.scrape_games
+    Scoreboard::Games.today(games_array)
+    binding.pry
     @games.each.with_index(1) do |game, i|
       puts "#{i}. #{game.matchup}"
     end
