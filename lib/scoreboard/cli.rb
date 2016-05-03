@@ -15,11 +15,13 @@ class Scoreboard::CLI
 
   def list_games
     # here doc http://blog.jayfields.com/2006/12/ruby-multiline-strings-here-doc-or.html
-    binding.pry
     games_array = Scoreboard::Scraper.scrape_games
-    Games.today(games_array)
-    @games.each.with_index(1) do |game, i|
+    Scoreboard::Games.today(games_array)
+    binding.pry
+    Scoreboard::Games.all.each.with_index(1) do |game, i|
       puts "#{i}. #{game.matchup}"
+    # @games.each.with_index(1) do |game, i|
+    #   puts "#{i}. #{game.matchup}"
     end
   end
 

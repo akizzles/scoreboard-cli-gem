@@ -4,7 +4,7 @@ require 'nokogiri'
 
 class Scoreboard::Games
 
-  attr_accessor :games, :num_games, :matchup, :score, :status, :matchup_array, :away_team, :away_score, :home_team, :home_score
+  attr_accessor :games, :games_array, :num_games, :matchup, :score, :status, :matchup_array, :away_team, :away_score, :home_team, :home_score, :games_hash
 
   @@all = []
 
@@ -15,8 +15,7 @@ class Scoreboard::Games
 
 
   def self.today(games_array)
-    games_array.each {|games_hash| Games.new(games_hash)}
-
+    games_array.each {|games_hash| Scoreboard::Games.new(games_hash)}
   end
 
   def self.all
