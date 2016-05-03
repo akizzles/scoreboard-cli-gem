@@ -11,7 +11,6 @@ class Scoreboard::CLI
   def list_games
     # here doc http://blog.jayfields.com/2006/12/ruby-multiline-strings-here-doc-or.html
     games_array = Scoreboard::Scraper.scrape_games
-    game_num = games_array.count
     @games = Scoreboard::Games.today(games_array)
     @games.each.with_index(1) do |game, i|
       puts "#{i}. #{game[:matchup]}"
@@ -22,21 +21,24 @@ class Scoreboard::CLI
     input = nil
     while input != "exit"
       puts "Enter the game you want to see the score or type 'exit'"
+
       input = gets.chomp
 
-      if input.to_i > 0
+      if input.to_i > @games.count
+        puts "There are only #{@games.count} games tonight. Please pick a valid game."
+      elsif input.to_i > 0 && input.to_i <= @games.count
         the_game = @games[input.to_i-1]
         puts "#{the_game[:score]}"
       elsif input == "list"
         list_games
       else
-        puts "Invalid"
+        goodbye
       end
     end
   end
 
   def goodbye
-    puts "See you tomorrow degen."
+    "See you tomorrow."
   end
 
 end
