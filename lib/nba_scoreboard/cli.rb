@@ -35,6 +35,7 @@ class NbaScoreboard::CLI
         goodbye
       end
     end
+    goodbye
   end
 
   def goodbye
