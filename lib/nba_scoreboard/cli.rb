@@ -1,6 +1,6 @@
 class NbaScoreboard::CLI
   def call
-    puts "Today's Games"
+    puts "Today's Games:"
     list_games
     menu
     #list_scores
@@ -20,26 +20,23 @@ class NbaScoreboard::CLI
   def menu
     input = nil
     while input != "exit"
-      puts "Enter the game you want to see the score or type 'exit'"
+      puts "\nEnter the game you want to see the score or type 'exit'\n"
 
       input = gets.chomp
 
       if input.to_i > @games.count
-        puts "There are only #{@games.count} games tonight. Please pick a valid game."
+        puts "\nThere are only #{@games.count} games tonight. Please pick a valid game.\n"
       elsif input.to_i > 0 && input.to_i <= @games.count
         the_game = @games[input.to_i-1]
-        puts "#{the_game[:score]}"
+        puts "\n#{the_game[:score]}\n"
       elsif input == "list"
         list_games
-      else
-        goodbye
       end
     end
-    goodbye
   end
 
   def goodbye
-    "See you tomorrow."
+    puts "\nSee you tomorrow.\n"
   end
 
 end
