@@ -6,9 +6,11 @@ class Scoreboard::Games
 
   attr_accessor :games, :num_games, :matchup, :score, :status, :matchup_array, :away_team, :away_score, :home_team, :home_score
 
+  @@all = []
+
   def initialize(games_hash)
-    binding.pry
     games_hash.each {|k, v| self.send("#{k}=", v)}
+    self.class.all << self
   end
 
 
@@ -17,6 +19,8 @@ class Scoreboard::Games
 
   end
 
-
+  def self.all
+    @@all
+  end
 
 end
