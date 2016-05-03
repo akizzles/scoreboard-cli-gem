@@ -9,7 +9,7 @@ class Scoreboard::Scraper
     game_num = doc.search("td.align_left.valign_top").count
     scraped_games = []
     i = 0
-    while i <= game_num
+    while i < game_num
       matchup_array = doc.css(".no_highlight .wide_table")[3*i].text.gsub(/^$\n/,'').split("\n")
       away_team = matchup_array[0]
       away_score = matchup_array[1]
