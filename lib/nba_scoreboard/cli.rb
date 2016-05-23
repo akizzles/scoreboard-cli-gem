@@ -1,6 +1,6 @@
 class NbaScoreboard::CLI
   def call
-    puts "Today's Games:"
+    puts "Yesterday's Games:"
     list_games
     menu
     #list_scores
